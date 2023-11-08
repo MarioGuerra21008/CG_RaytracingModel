@@ -12,7 +12,7 @@
 #include "color.h"
 #include "intersect.h"
 #include "object.h"
-#include "sphere.h"
+#include "cube.h"
 #include "light.h"
 #include "camera.h"
 
@@ -24,8 +24,8 @@ const float BIAS = 0.0001f;
 
 SDL_Renderer* renderer;
 std::vector<Object*> objects;
-Light light(glm::vec3(-1.0, 0, 10), 1.5f, Color(255, 255, 255));
-Camera camera(glm::vec3(0.0, 0.0, 5.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), 10.0f);
+Light light(glm::vec3(0.0f, 0.0f, -20.0f), 10.0f, Color(255, 255, 0));
+Camera camera(glm::vec3(0.0f, 0.0f, 20.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), 10.0f);
 
 
 void point(glm::vec2 position, Color color) {
@@ -102,34 +102,34 @@ Color castRay(const glm::vec3& rayOrigin, const glm::vec3& rayDirection, const s
 }
 
 void setUp() {
-    Material rubber = {
-            Color(80, 0, 0),   // diffuse
-            0.9,
-            0.1,
-            10.0f,
+    Material emoji = {
+            Color(255, 255, 0),
+            1.0,
+            0.5,
+            2.0f,
             0.0f,
             0.0f
     };
 
-    Material ivory = {
-            Color(100, 100, 80),
+    Material eyeAndEyebrows = {
+            Color(0, 0, 0),
             0.5,
             0.5,
             50.0f,
-            0.4f,
-            0.0f
-    };
-
-    Material mirror = {
-            Color(255, 255, 255),
             0.0f,
-            10.0f,
-            1425.0f,
-            0.9f,
             0.0f
     };
 
-    Material glass = {
+    Material glasses = {
+            Color(112, 88, 44),
+            1.0,
+            10.0f,
+            5.0f,
+            0.0f,
+            0.0f
+    };
+
+    Material tooth = {
             Color(255, 255, 255),
             0.0f,
             10.0f,
@@ -137,10 +137,52 @@ void setUp() {
             0.2f,
             1.0f,
     };
-    objects.push_back(new Sphere(glm::vec3(0.0f, 0.0f, 0.0f), 1.0f, rubber));
-    objects.push_back(new Sphere(glm::vec3(-1.0f, 0.0f, -4.0f), 1.0f, ivory));
-    objects.push_back(new Sphere(glm::vec3(1.0f, 0.0f, -4.0f), 1.0f, mirror));
-    objects.push_back(new Sphere(glm::vec3(0.0f, 1.0f, -3.0f), 1.0f, glass));
+
+    Material freckles = {
+            Color(230, 158, 25),
+            0.0f,
+            10.0f,
+            1425.0f,
+            0.2f,
+            1.0f,
+    };
+
+    //Cuerpo amarillo del emoji
+    objects.push_back(new Cube(glm::vec3(10.0f, 10.0f, 0.0f), glm::vec3(-10.0f, -10.0f, 0.0f), emoji));
+
+    //Ojos y cejas de ambas caras
+    objects.push_back(new Cube(glm::vec3(-5.0f, 0.5f, 0.5f), glm::vec3(-2.0f, 3.5f, 0.0f), eyeAndEyebrows));
+    objects.push_back(new Cube(glm::vec3(2.0f, 0.5f, 0.5f), glm::vec3(5.0f, 3.5f, 0.0f), eyeAndEyebrows));
+    objects.push_back(new Cube(glm::vec3(-6.0f, 5.0f, 0.5f), glm::vec3(-1.0f, 6.0f, 0.0f), eyeAndEyebrows));
+    objects.push_back(new Cube(glm::vec3(1.0f, 5.0f, 0.5f), glm::vec3(6.0f, 6.0f, 0.0f), eyeAndEyebrows));
+
+    objects.push_back(new Cube(glm::vec3(-5.0f, 0.5f, -0.5f), glm::vec3(-2.0f, 3.5f, 0.0f), eyeAndEyebrows));
+    objects.push_back(new Cube(glm::vec3(2.0f, 0.5f, -0.5f), glm::vec3(5.0f, 3.5f, 0.0f), eyeAndEyebrows));
+    objects.push_back(new Cube(glm::vec3(-6.0f, 5.0f, -0.5f), glm::vec3(-1.0f, 6.0f, 0.0f), eyeAndEyebrows));
+    objects.push_back(new Cube(glm::vec3(1.0f, 5.0f, -0.5f), glm::vec3(6.0f, 6.0f, 0.0f), eyeAndEyebrows));
+
+    //Los lentes del emoji
+    objects.push_back(new Cube(glm::vec3(-11.0f, 4.0f, 0.5f), glm::vec3(11.0f, 4.5f, 0.0f), glasses));
+    objects.push_back(new Cube(glm::vec3(-7.0f, -0.5f, 0.5f), glm::vec3(-6.5f, 4.5f, 0.0f), glasses));
+    objects.push_back(new Cube(glm::vec3(-7.0f, -0.5f, 0.5f), glm::vec3(-0.5f, 0.0f, 0.0f), glasses));
+    objects.push_back(new Cube(glm::vec3(-1.0f, -0.5f, 0.5f), glm::vec3(-0.5f, 4.5f, 0.0f), glasses));
+    objects.push_back(new Cube(glm::vec3(0.5f, -0.5f, 0.5f), glm::vec3(1.0f, 4.5f, 0.0f), glasses));
+    objects.push_back(new Cube(glm::vec3(0.5f, -0.5f, 0.5f), glm::vec3(6.5f, 0.0f, 0.0f), glasses));
+    objects.push_back(new Cube(glm::vec3(6.5f, -0.5f, 0.5f), glm::vec3(7.0f, 4.5f, 0.0f), glasses));
+
+    objects.push_back(new Cube(glm::vec3(-11.0f, 4.0f, -0.5f), glm::vec3(11.0f, 4.5f, 0.0f), glasses));
+    objects.push_back(new Cube(glm::vec3(-7.0f, -0.5f, -0.5f), glm::vec3(-6.5f, 4.5f, 0.0f), glasses));
+    objects.push_back(new Cube(glm::vec3(-7.0f, -0.5f, -0.5f), glm::vec3(-0.5f, 0.0f, 0.0f), glasses));
+    objects.push_back(new Cube(glm::vec3(-1.0f, -0.5f, -0.5f), glm::vec3(-0.5f, 4.5f, 0.0f), glasses));
+    objects.push_back(new Cube(glm::vec3(0.5f, -0.5f, -0.5f), glm::vec3(1.0f, 4.5f, 0.0f), glasses));
+    objects.push_back(new Cube(glm::vec3(0.5f, -0.5f, -0.5f), glm::vec3(6.5f, 0.0f, 0.0f), glasses));
+    objects.push_back(new Cube(glm::vec3(6.5f, -0.5f, -0.5f), glm::vec3(7.0f, 4.5f, 0.0f), glasses));
+
+    //La boca
+
+
+
+    //objects.push_back(new Cube(glm::vec3(0.0f, 1.0f, -3.0f), glm::vec3(1.0f), glass));
 }
 
 void render() {
