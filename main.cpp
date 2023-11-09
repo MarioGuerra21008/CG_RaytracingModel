@@ -13,6 +13,7 @@
 #include "intersect.h"
 #include "object.h"
 #include "cube.h"
+#include "sphere.h"
 #include "light.h"
 #include "camera.h"
 
@@ -93,8 +94,6 @@ Color castRay(const glm::vec3& rayOrigin, const glm::vec3& rayDirection, const s
         refractedColor = castRay(origin, refractDir, recursion + 1);
     }
 
-
-
     Color diffuseLight = mat.diffuse * light.intensity * diffuseLightIntensity * mat.albedo * shadowIntensity;
     Color specularLight = light.color * light.intensity * specLightIntensity * mat.specularAlbedo * shadowIntensity;
     Color color = (diffuseLight + specularLight) * (1.0f - mat.reflectivity - mat.transparency) + reflectedColor * mat.reflectivity + refractedColor * mat.transparency;
@@ -123,28 +122,28 @@ void setUp() {
     Material glasses = {
             Color(112, 88, 44),
             1.0,
-            10.0f,
-            5.0f,
+            1.0f,
+            2.0f,
             0.0f,
             0.0f
     };
 
     Material tooth = {
             Color(255, 255, 255),
-            0.0f,
-            10.0f,
-            1425.0f,
-            0.2f,
             1.0f,
+            0.5f,
+            0.0f,
+            0.0f,
+            0.0f,
     };
 
     Material freckles = {
-            Color(230, 158, 25),
-            0.0f,
-            10.0f,
-            1425.0f,
-            0.2f,
+            Color(255, 165, 0),
             1.0f,
+            2.0f,
+            2.0f,
+            0.0f,
+            0.0f,
     };
 
     //Cuerpo amarillo del emoji
@@ -180,9 +179,30 @@ void setUp() {
 
     //La boca
 
+    objects.push_back(new Cube(glm::vec3(-3.0f, -6.0f, 0.5f), glm::vec3(3.0f, -4.0f, 0.0f), eyeAndEyebrows));
+    objects.push_back(new Cube(glm::vec3(-1.5f, -6.25f, 1.0f), glm::vec3(1.5f, -4.0f, 0.0f), tooth));
+
+    objects.push_back(new Cube(glm::vec3(-3.0f, -6.0f, -0.5f), glm::vec3(3.0f, -4.0f, 0.0f), eyeAndEyebrows));
+    objects.push_back(new Cube(glm::vec3(-1.5f, -6.25f, -1.0f), glm::vec3(1.5f, -4.0f, 0.0f), tooth));
+
+    //Las pecas
+    objects.push_back(new Cube(glm::vec3(-5.5f, -3.0f, 0.5f), glm::vec3(-5.0f, -2.5f, 0.0f), freckles));
+    objects.push_back(new Cube(glm::vec3(-7.5f, -3.0f, 0.5f), glm::vec3(-7.0f, -2.5f, 0.0f), freckles));
+    objects.push_back(new Cube(glm::vec3(-6.5f, -5.0f, 0.5f), glm::vec3(-6.0f, -4.5f, 0.0f), freckles));
+
+    objects.push_back(new Cube(glm::vec3(5.5f, -3.0f, 0.5f), glm::vec3(5.0f, -2.5f, 0.0f), freckles));
+    objects.push_back(new Cube(glm::vec3(7.5f, -3.0f, 0.5f), glm::vec3(7.0f, -2.5f, 0.0f), freckles));
+    objects.push_back(new Cube(glm::vec3(6.5f, -5.0f, 0.5f), glm::vec3(6.0f, -4.5f, 0.0f), freckles));
+
+    objects.push_back(new Cube(glm::vec3(-5.5f, -3.0f, -0.5f), glm::vec3(-5.0f, -2.5f, 0.0f), freckles));
+    objects.push_back(new Cube(glm::vec3(-7.5f, -3.0f, -0.5f), glm::vec3(-7.0f, -2.5f, 0.0f), freckles));
+    objects.push_back(new Cube(glm::vec3(-6.5f, -5.0f, -0.5f), glm::vec3(-6.0f, -4.5f, 0.0f), freckles));
+
+    objects.push_back(new Cube(glm::vec3(5.5f, -3.0f, -0.5f), glm::vec3(5.0f, -2.5f, 0.0f), freckles));
+    objects.push_back(new Cube(glm::vec3(7.5f, -3.0f, -0.5f), glm::vec3(7.0f, -2.5f, 0.0f), freckles));
+    objects.push_back(new Cube(glm::vec3(6.5f, -5.0f, -0.5f), glm::vec3(6.0f, -4.5f, 0.0f), freckles));
 
 
-    //objects.push_back(new Cube(glm::vec3(0.0f, 1.0f, -3.0f), glm::vec3(1.0f), glass));
 }
 
 void render() {
