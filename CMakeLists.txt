@@ -13,6 +13,6 @@ include_directories(${SDL2_IMAGE_DIR})
 link_directories(${SDL2_LIB_DIR})
 link_directories(${SDL2_IMAGE_LIB})
 
-add_executable(CG_RaytracingModel main.cpp camera.h camera.cpp color.h intersect.h light.h material.h object.h print.h sphere.h sphere.cpp cube.h cube.cpp)
+add_executable(CG_RaytracingModel main.cpp camera.h camera.cpp color.h intersect.h light.h material.h object.h print.h sphere.h sphere.cpp cube.h cube.cpp skybox.h skybox.cpp)
 
 target_link_libraries(CG_RaytracingModel SDL2main SDL2 ${SDL2_IMAGE_LIB})

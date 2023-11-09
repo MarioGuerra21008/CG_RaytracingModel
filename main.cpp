@@ -16,6 +16,7 @@
 #include "sphere.h"
 #include "light.h"
 #include "camera.h"
+#include "skybox.h"
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
@@ -27,7 +28,7 @@ SDL_Renderer* renderer;
 std::vector<Object*> objects;
 Light light(glm::vec3(0.0f, 0.0f, -20.0f), 10.0f, Color(255, 255, 0));
 Camera camera(glm::vec3(0.0f, 0.0f, 20.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), 10.0f);
-
+Skybox skybox("../textura1.png");
 
 void point(glm::vec2 position, Color color) {
     SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
@@ -62,8 +63,8 @@ Color castRay(const glm::vec3& rayOrigin, const glm::vec3& rayDirection, const s
         }
     }
 
-    if (!intersect.isIntersecting || recursion == MAX_RECURSION) {
-        return Color(173, 216, 230);
+    if (!intersect.isIntersecting || recursion >= MAX_RECURSION) {
+        return skybox.getColor(rayDirection);  // Sky color
     }
 
 
