@@ -26,7 +26,7 @@ const float BIAS = 0.0001f;
 
 SDL_Renderer* renderer;
 std::vector<Object*> objects;
-Light light(glm::vec3(0.0f, 0.0f, -20.0f), 10.0f, Color(255, 255, 0));
+Light light(glm::vec3(0.0f, 0.0f, -80.0f), 10.0f, Color(255, 255, 0));
 Camera camera(glm::vec3(0.0f, 0.0f, 20.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), 10.0f);
 Skybox skybox("../textura1.png");
 
@@ -148,62 +148,60 @@ void setUp() {
     };
 
     //Cuerpo amarillo del emoji
-    objects.push_back(new Cube(glm::vec3(10.0f, 10.0f, 0.0f), glm::vec3(-10.0f, -10.0f, 0.0f), emoji));
+    objects.push_back(new Cube(glm::vec3(10.0f, 10.0f, -2.0f), glm::vec3(-10.0f, -10.0f, 2.0f), emoji));
 
     //Ojos y cejas de ambas caras
-    objects.push_back(new Cube(glm::vec3(-5.0f, 0.5f, 0.5f), glm::vec3(-2.0f, 3.5f, 0.0f), eyeAndEyebrows));
-    objects.push_back(new Cube(glm::vec3(2.0f, 0.5f, 0.5f), glm::vec3(5.0f, 3.5f, 0.0f), eyeAndEyebrows));
-    objects.push_back(new Cube(glm::vec3(-6.0f, 5.0f, 0.5f), glm::vec3(-1.0f, 6.0f, 0.0f), eyeAndEyebrows));
-    objects.push_back(new Cube(glm::vec3(1.0f, 5.0f, 0.5f), glm::vec3(6.0f, 6.0f, 0.0f), eyeAndEyebrows));
+    objects.push_back(new Cube(glm::vec3(-5.0f, 0.5f, 2.5f), glm::vec3(-2.0f, 3.5f, 0.0f), eyeAndEyebrows));
+    objects.push_back(new Cube(glm::vec3(2.0f, 0.5f, 2.5f), glm::vec3(5.0f, 3.5f, 0.0f), eyeAndEyebrows));
+    objects.push_back(new Cube(glm::vec3(-6.0f, 5.0f, 2.5f), glm::vec3(-1.0f, 6.0f, 0.0f), eyeAndEyebrows));
+    objects.push_back(new Cube(glm::vec3(1.0f, 5.0f, 2.5f), glm::vec3(6.0f, 6.0f, 0.0f), eyeAndEyebrows));
 
-    objects.push_back(new Cube(glm::vec3(-5.0f, 0.5f, -0.5f), glm::vec3(-2.0f, 3.5f, 0.0f), eyeAndEyebrows));
-    objects.push_back(new Cube(glm::vec3(2.0f, 0.5f, -0.5f), glm::vec3(5.0f, 3.5f, 0.0f), eyeAndEyebrows));
-    objects.push_back(new Cube(glm::vec3(-6.0f, 5.0f, -0.5f), glm::vec3(-1.0f, 6.0f, 0.0f), eyeAndEyebrows));
-    objects.push_back(new Cube(glm::vec3(1.0f, 5.0f, -0.5f), glm::vec3(6.0f, 6.0f, 0.0f), eyeAndEyebrows));
+    objects.push_back(new Cube(glm::vec3(-5.0f, 0.5f, -2.5f), glm::vec3(-2.0f, 3.5f, 0.0f), eyeAndEyebrows));
+    objects.push_back(new Cube(glm::vec3(2.0f, 0.5f, -2.5f), glm::vec3(5.0f, 3.5f, 0.0f), eyeAndEyebrows));
+    objects.push_back(new Cube(glm::vec3(-6.0f, 5.0f, -2.5f), glm::vec3(-1.0f, 6.0f, 0.0f), eyeAndEyebrows));
+    objects.push_back(new Cube(glm::vec3(1.0f, 5.0f, -2.5f), glm::vec3(6.0f, 6.0f, 0.0f), eyeAndEyebrows));
 
     //Los lentes del emoji
-    objects.push_back(new Cube(glm::vec3(-11.0f, 4.0f, 0.5f), glm::vec3(11.0f, 4.5f, 0.0f), glasses));
-    objects.push_back(new Cube(glm::vec3(-7.0f, -0.5f, 0.5f), glm::vec3(-6.5f, 4.5f, 0.0f), glasses));
-    objects.push_back(new Cube(glm::vec3(-7.0f, -0.5f, 0.5f), glm::vec3(-0.5f, 0.0f, 0.0f), glasses));
-    objects.push_back(new Cube(glm::vec3(-1.0f, -0.5f, 0.5f), glm::vec3(-0.5f, 4.5f, 0.0f), glasses));
-    objects.push_back(new Cube(glm::vec3(0.5f, -0.5f, 0.5f), glm::vec3(1.0f, 4.5f, 0.0f), glasses));
-    objects.push_back(new Cube(glm::vec3(0.5f, -0.5f, 0.5f), glm::vec3(6.5f, 0.0f, 0.0f), glasses));
-    objects.push_back(new Cube(glm::vec3(6.5f, -0.5f, 0.5f), glm::vec3(7.0f, 4.5f, 0.0f), glasses));
+    objects.push_back(new Cube(glm::vec3(-11.0f, 4.0f, 2.5f), glm::vec3(11.0f, 4.5f, 0.0f), glasses));
+    objects.push_back(new Cube(glm::vec3(-7.0f, -0.5f, 2.5f), glm::vec3(-6.5f, 4.5f, 0.0f), glasses));
+    objects.push_back(new Cube(glm::vec3(-7.0f, -0.5f, 2.5f), glm::vec3(-0.5f, 0.0f, 0.0f), glasses));
+    objects.push_back(new Cube(glm::vec3(-1.0f, -0.5f, 2.5f), glm::vec3(-0.5f, 4.5f, 0.0f), glasses));
+    objects.push_back(new Cube(glm::vec3(0.5f, -0.5f, 2.5f), glm::vec3(1.0f, 4.5f, 0.0f), glasses));
+    objects.push_back(new Cube(glm::vec3(0.5f, -0.5f, 2.5f), glm::vec3(6.5f, 0.0f, 0.0f), glasses));
+    objects.push_back(new Cube(glm::vec3(6.5f, -0.5f, 2.5f), glm::vec3(7.0f, 4.5f, 0.0f), glasses));
 
-    objects.push_back(new Cube(glm::vec3(-11.0f, 4.0f, -0.5f), glm::vec3(11.0f, 4.5f, 0.0f), glasses));
-    objects.push_back(new Cube(glm::vec3(-7.0f, -0.5f, -0.5f), glm::vec3(-6.5f, 4.5f, 0.0f), glasses));
-    objects.push_back(new Cube(glm::vec3(-7.0f, -0.5f, -0.5f), glm::vec3(-0.5f, 0.0f, 0.0f), glasses));
-    objects.push_back(new Cube(glm::vec3(-1.0f, -0.5f, -0.5f), glm::vec3(-0.5f, 4.5f, 0.0f), glasses));
-    objects.push_back(new Cube(glm::vec3(0.5f, -0.5f, -0.5f), glm::vec3(1.0f, 4.5f, 0.0f), glasses));
-    objects.push_back(new Cube(glm::vec3(0.5f, -0.5f, -0.5f), glm::vec3(6.5f, 0.0f, 0.0f), glasses));
-    objects.push_back(new Cube(glm::vec3(6.5f, -0.5f, -0.5f), glm::vec3(7.0f, 4.5f, 0.0f), glasses));
+    objects.push_back(new Cube(glm::vec3(-11.0f, 4.0f, -2.5f), glm::vec3(11.0f, 4.5f, 0.0f), glasses));
+    objects.push_back(new Cube(glm::vec3(-7.0f, -0.5f, -2.5f), glm::vec3(-6.5f, 4.5f, 0.0f), glasses));
+    objects.push_back(new Cube(glm::vec3(-7.0f, -0.5f, -2.5f), glm::vec3(-0.5f, 0.0f, 0.0f), glasses));
+    objects.push_back(new Cube(glm::vec3(-1.0f, -0.5f, -2.5f), glm::vec3(-0.5f, 4.5f, 0.0f), glasses));
+    objects.push_back(new Cube(glm::vec3(0.5f, -0.5f, -2.5f), glm::vec3(1.0f, 4.5f, 0.0f), glasses));
+    objects.push_back(new Cube(glm::vec3(0.5f, -0.5f, -2.5f), glm::vec3(6.5f, 0.0f, 0.0f), glasses));
+    objects.push_back(new Cube(glm::vec3(6.5f, -0.5f, -2.5f), glm::vec3(7.0f, 4.5f, 0.0f), glasses));
 
     //La boca
 
-    objects.push_back(new Cube(glm::vec3(-3.0f, -6.0f, 0.5f), glm::vec3(3.0f, -4.0f, 0.0f), eyeAndEyebrows));
-    objects.push_back(new Cube(glm::vec3(-1.5f, -6.25f, 1.0f), glm::vec3(1.5f, -4.0f, 0.0f), tooth));
+    objects.push_back(new Cube(glm::vec3(-3.0f, -6.0f, 2.5f), glm::vec3(3.0f, -4.0f, 0.0f), eyeAndEyebrows));
+    objects.push_back(new Cube(glm::vec3(-1.5f, -6.25f, 3.0f), glm::vec3(1.5f, -4.0f, 0.0f), tooth));
 
-    objects.push_back(new Cube(glm::vec3(-3.0f, -6.0f, -0.5f), glm::vec3(3.0f, -4.0f, 0.0f), eyeAndEyebrows));
-    objects.push_back(new Cube(glm::vec3(-1.5f, -6.25f, -1.0f), glm::vec3(1.5f, -4.0f, 0.0f), tooth));
+    objects.push_back(new Cube(glm::vec3(-3.0f, -6.0f, -2.5f), glm::vec3(3.0f, -4.0f, 0.0f), eyeAndEyebrows));
+    objects.push_back(new Cube(glm::vec3(-1.5f, -6.25f, -3.0f), glm::vec3(1.5f, -4.0f, 0.0f), tooth));
 
     //Las pecas
-    objects.push_back(new Cube(glm::vec3(-5.5f, -3.0f, 0.5f), glm::vec3(-5.0f, -2.5f, 0.0f), freckles));
-    objects.push_back(new Cube(glm::vec3(-7.5f, -3.0f, 0.5f), glm::vec3(-7.0f, -2.5f, 0.0f), freckles));
-    objects.push_back(new Cube(glm::vec3(-6.5f, -5.0f, 0.5f), glm::vec3(-6.0f, -4.5f, 0.0f), freckles));
+    objects.push_back(new Cube(glm::vec3(-5.5f, -3.0f, 2.5f), glm::vec3(-5.0f, -2.5f, 0.0f), freckles));
+    objects.push_back(new Cube(glm::vec3(-7.5f, -3.0f, 2.5f), glm::vec3(-7.0f, -2.5f, 0.0f), freckles));
+    objects.push_back(new Cube(glm::vec3(-6.5f, -5.0f, 2.5f), glm::vec3(-6.0f, -4.5f, 0.0f), freckles));
 
-    objects.push_back(new Cube(glm::vec3(5.5f, -3.0f, 0.5f), glm::vec3(5.0f, -2.5f, 0.0f), freckles));
-    objects.push_back(new Cube(glm::vec3(7.5f, -3.0f, 0.5f), glm::vec3(7.0f, -2.5f, 0.0f), freckles));
-    objects.push_back(new Cube(glm::vec3(6.5f, -5.0f, 0.5f), glm::vec3(6.0f, -4.5f, 0.0f), freckles));
+    objects.push_back(new Cube(glm::vec3(5.5f, -3.0f, 2.5f), glm::vec3(5.0f, -2.5f, 0.0f), freckles));
+    objects.push_back(new Cube(glm::vec3(7.5f, -3.0f, 2.5f), glm::vec3(7.0f, -2.5f, 0.0f), freckles));
+    objects.push_back(new Cube(glm::vec3(6.5f, -5.0f, 2.5f), glm::vec3(6.0f, -4.5f, 0.0f), freckles));
 
-    objects.push_back(new Cube(glm::vec3(-5.5f, -3.0f, -0.5f), glm::vec3(-5.0f, -2.5f, 0.0f), freckles));
-    objects.push_back(new Cube(glm::vec3(-7.5f, -3.0f, -0.5f), glm::vec3(-7.0f, -2.5f, 0.0f), freckles));
-    objects.push_back(new Cube(glm::vec3(-6.5f, -5.0f, -0.5f), glm::vec3(-6.0f, -4.5f, 0.0f), freckles));
+    objects.push_back(new Cube(glm::vec3(-5.5f, -3.0f, -2.5f), glm::vec3(-5.0f, -2.5f, 0.0f), freckles));
+    objects.push_back(new Cube(glm::vec3(-7.5f, -3.0f, -2.5f), glm::vec3(-7.0f, -2.5f, 0.0f), freckles));
+    objects.push_back(new Cube(glm::vec3(-6.5f, -5.0f, -2.5f), glm::vec3(-6.0f, -4.5f, 0.0f), freckles));
 
-    objects.push_back(new Cube(glm::vec3(5.5f, -3.0f, -0.5f), glm::vec3(5.0f, -2.5f, 0.0f), freckles));
-    objects.push_back(new Cube(glm::vec3(7.5f, -3.0f, -0.5f), glm::vec3(7.0f, -2.5f, 0.0f), freckles));
-    objects.push_back(new Cube(glm::vec3(6.5f, -5.0f, -0.5f), glm::vec3(6.0f, -4.5f, 0.0f), freckles));
-
-
+    objects.push_back(new Cube(glm::vec3(5.5f, -3.0f, -2.5f), glm::vec3(5.0f, -2.5f, 0.0f), freckles));
+    objects.push_back(new Cube(glm::vec3(7.5f, -3.0f, -2.5f), glm::vec3(7.0f, -2.5f, 0.0f), freckles));
+    objects.push_back(new Cube(glm::vec3(6.5f, -5.0f, -2.5f), glm::vec3(6.0f, -4.5f, 0.0f), freckles));
 }
 
 void render() {
